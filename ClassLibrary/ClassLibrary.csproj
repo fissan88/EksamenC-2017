@@ -65,7 +65,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storage\Storage.cs" />
+    <Compile Include="Storage\Context.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

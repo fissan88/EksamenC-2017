@@ -1,7 +1,7 @@
 namespace Eksamen2017.Migrations
 {
-    using Eksamen2017.Model;
-    using Eksamen2017.Storage;
+    using Context;
+    using Model;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;

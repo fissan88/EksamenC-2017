@@ -102,7 +102,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eksamen2017\ClassLibrary.csproj">
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
       <Project>{8592697F-D06D-4C89-B59A-9003270FCB13}</Project>
       <Name>ClassLibrary</Name>
     </ProjectReference>

@@ -1,4 +1,5 @@
-﻿using Eksamen2017.Model;
+﻿
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eksamen2017.Storage
+namespace Context
 {
     public class Storage : DbContext
     {
