@@ -1,5 +1,5 @@
 ﻿
-using Context;
+using Storage;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -23,12 +23,12 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        Storage storage = new Storage();
+        Context context = new Context();
 
         public MainWindow()
         {
-            User temp = storage.getUserByUserName("user1");
-            Console.WriteLine(temp.UserName);
+            User temp = context.getUserByUsername("user1");
+            Console.WriteLine(temp.Username);
 
             InitializeComponent();
 
