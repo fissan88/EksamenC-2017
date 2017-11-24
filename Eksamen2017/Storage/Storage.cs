@@ -14,6 +14,8 @@ namespace Eksamen2017.Storage
 
         public DbSet<User> Users { get; set; }
 
+        // TEST
+
         public User getUserByUserName(string userName)
         {
             User user = Users.FirstOrDefault(x => x.UserName == userName);
