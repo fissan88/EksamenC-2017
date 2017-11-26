@@ -14,7 +14,7 @@ namespace WebApplication.Controllers
 
         public ActionResult Index(int? userId)
         {
-            User user = context.getUserById(userId);
+            User user = context.GetUserById(userId);
             if (user != null)
             {
                 return View(user);

@@ -5,8 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="Fraværsregistrering" Height="600" Width="800">
+
+    <TabControl>
+
+        <!-- Fag-Tab -->
+        <TabItem Header="Courses">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="14*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Listview Fag -->
+                <Label Content="Registered Courses:" Grid.Row="0" Grid.Column="0" />
+                <ListView Margin="10" x:Name="tabCourse_listview_courses" Grid.Row="1" Grid.Column="0" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="#" Width="20" DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Teacher" Width="200" DisplayMemberBinding="{Binding Teacher}" />
+                        </GridView>
+                </ListView.View>
+                </ListView>
+
+                <ListView Margin="10" x:Name="tabCourse_listview_lessons" Grid.Row="1" Grid.Column="1" IsEnabled="False">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="#" Width="20" DisplayMemberBinding="{Binding Id}" />
+                            <GridViewColumn Header="Date" Width="150" DisplayMemberBinding="{Binding Date}" />
+                            <GridViewColumn Header="Time" Width="150" DisplayMemberBinding="{Binding Block}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="tabCourse_button_createCourse" Margin="10" Content="Create new course" Grid.Row="2" Grid.Column="0" />
+                <Button x:Name="tabCourse_button_createLesson" Margin="10" Content="Create new lesson" Grid.Row="2" Grid.Column="1" IsEnabled="False" />
+
+            </Grid>
+        </TabItem>
         
-    </Grid>
+        
+        
+        
+        
+        <TabItem Header="Teachers" />
+        <TabItem Header="Students" />
+       
+    </TabControl>
 </Window>

@@ -21,10 +21,10 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult Index(string username)
         {
-            User user = context.getUserByUsername(username);
+            User user = context.GetUserByUsername(username);
             if (user != null)
             {
-                return RedirectToAction("Index", "Home", new { userId = user.Id });
+                return RedirectToAction("Index", "Home", new { Id = user.Id });
             }
             else return View();
         }
