@@ -1,0 +1,34 @@
+﻿<Window x:Class="WpfApp.CreateLessonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="Create new lesson" Height="150" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Start date -->
+        <Label Content="Starts:" Grid.Row="0" Grid.Column="0" />
+        <DatePicker x:Name="createLesson_datepicker_startTime" Grid.Row="0" Grid.Column="1" />
+        <ComboBox x:Name="createLesson_menu_startTime" Text="Select a time" Grid.Row="0" Grid.Column="2" />
+        
+        <!-- End date -->
+        <Label Content="Ends:" Grid.Row="1" Grid.Column="0" />
+        <DatePicker x:Name="createLesson_datepicker_endTime" Grid.Row="1" Grid.Column="1" />
+        <ComboBox x:Name="createLesson_menu_endTime" Text="Select a time" Grid.Row="1" Grid.Column="2" />
+
+        <Button x:Name="createLesson_button_createLesson" Margin="5" Content="Create lesson" Grid.Row="2" Grid.Column="2" />
+    </Grid>
+</Window>

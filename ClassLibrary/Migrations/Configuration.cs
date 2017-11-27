@@ -31,18 +31,18 @@ namespace Eksamen2017.Migrations
 
             Lesson[] lessons =
             {
-                new Lesson { Id = 1, Date = new DateTime(2017, 11, 26), Block = Lesson.BlockType.b1},
-                new Lesson { Id = 2, Date = new DateTime(2017, 11, 26), Block = Lesson.BlockType.b2},
-                new Lesson { Id = 3, Date = new DateTime(2017, 11, 26), Block = Lesson.BlockType.b3}
+                new Lesson { Id = 1, StartDate = new DateTime(2017, 11, 26, 08, 30, 00), EndDate = new DateTime(2017, 11, 26, 10, 00, 00)},
+                new Lesson { Id = 2, StartDate = new DateTime(2017, 11, 26, 10, 30, 00), EndDate = new DateTime(2017, 11, 26, 12, 00, 00)},
+                new Lesson { Id = 3, StartDate = new DateTime(2017, 11, 26, 12, 30, 00), EndDate = new DateTime(2017, 11, 26, 14, 00, 00)}
             };
 
-            context.Lessons.AddOrUpdate(l => l.Date, lessons);
+            context.Lessons.AddOrUpdate(l => l.Id, lessons);
 
             context.Courses.AddOrUpdate(c => c.Id,
                 new Course {
                     Id = 1,
                     Name = "Course1",
-                    Teacher = (Teacher)users[0],
+                    Teacher = (Teacher) users[0],
                     Students = new List<Student> { (Student)users[1], (Student)users[2] },
                     Lessons = lessons.ToList()
                 }       

@@ -39,8 +39,8 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="#" Width="20" DisplayMemberBinding="{Binding Id}" />
-                            <GridViewColumn Header="Date" Width="150" DisplayMemberBinding="{Binding Date}" />
-                            <GridViewColumn Header="Time" Width="150" DisplayMemberBinding="{Binding Block}" />
+                            <GridViewColumn Header="Starts" Width="150" DisplayMemberBinding="{Binding StartDate}" />
+                            <GridViewColumn Header="Ends" Width="150" DisplayMemberBinding="{Binding EndDate}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

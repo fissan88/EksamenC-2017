@@ -10,27 +10,28 @@ namespace ClassLibrary.Model
 {
     public class Lesson
     {
-        public enum BlockType {
-            [Description("8.30 - 10.00")] b1,
-            [Description("10.30 - 12.00")] b2,
-            [Description("12.30 - 14.00")] b3
-        }
-
         public Lesson()
         {
 
         }
 
+        public Lesson(DateTime startDate, DateTime endDate)
+        {
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+            this.AbsenceRegistrations = new List<AbsenceRegistration>();
+        }
+
         public int Id { get; set; }
-        public BlockType Block { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public List<AbsenceRegistration> AbsenceRegistrations { get; set; }
 
-        // Tjekker hvor vidt lekionen er gyldig til fraværsregistrering. Returnerer true hvis lektionens dato er dagsdato eller ældre.
+        // Tjekker hvor vidt lekionen er gyldig til fraværsregistrering. Returnerer true hvis lektionens slutdato er dagsdato eller ældre.
         public bool IsValidForRegistration()
         {
             DateTime now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            return this.Date.CompareTo(now) >= 0;
+            return this.EndDate.CompareTo(now) >= 0;
         }
     }
 }

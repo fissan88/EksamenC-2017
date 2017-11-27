@@ -27,10 +27,16 @@ namespace Storage
             return user;
         }
 
-        public User GetUserById(int? userId)
+        public User GetUserById(int? id)
         {
-            User user = Users.FirstOrDefault(x => x.Id == userId);
+            User user = Users.FirstOrDefault(x => x.Id == id);
             return user;
+        }
+
+        public void AddCourse(Course c)
+        {
+            Courses.Add(c);
+            SaveChanges();
         }
 
         public List<Course> GetAllCourses()
@@ -38,9 +44,22 @@ namespace Storage
             return Courses.Include(c => c.Lessons).Include(c => c.Teacher).ToList();
         }
 
+        public Course GetCourseById(int id)
+        {
+            Course course = Courses.Include(x => x.Lessons).FirstOrDefault(x => x.Id == id);
+            return course;
+        }
+
         public List<Teacher> GetAllTeachers()
         {
             return Teachers.ToList();
+        }
+
+        public void AddLesson(Course c, Lesson l)
+        {
+            Lessons.Add(l);
+            c.Lessons.Add(l);
+            SaveChanges();
         }
     }
 }

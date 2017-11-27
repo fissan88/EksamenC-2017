@@ -22,14 +22,14 @@ namespace WpfApp
     public partial class CreateCourseWindow : Window
     {
         Context context = new Context();
+        Course tempCourse = new Course();
 
         public CreateCourseWindow()
         {
             InitializeComponent();
-
             createCourse_listview_teachers.ItemsSource = context.GetAllTeachers();
-
             createCourse_button_create.Click += CreateCourse_button_create_Click;
+            this.DataContext = tempCourse;
         }
 
         private void CreateCourse_button_create_Click(object sender, RoutedEventArgs e)
@@ -40,8 +40,12 @@ namespace WpfApp
             if(teacher != null && name.Length > 0)
             {
                 Course newCourse = new Course(name, teacher);
-                context.Courses.Add(newCourse);
-                context.SaveChanges();
+                context.AddCourse(newCourse);
+
+                // Opdaterer listview i MainWindow
+                MainWindow parent = (MainWindow)this.DataContext;
+                parent.tabCourse_listview_courses.ItemsSource = context.GetAllCourses();
+
                 this.Close();
             }
         }

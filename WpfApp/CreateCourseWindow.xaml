@@ -25,7 +25,7 @@
         <TextBox x:Name="createCourse_textbox_name" Width="Auto" Height="Auto" Grid.Row="0" Grid.Column="1"/>
 
         <Label Content="Teacher:" Grid.Row="1" Grid.Column="0"/>
-        <ListView x:Name="createCourse_listview_teachers"  Grid.Row="1" Grid.Column="1" />
+        <ListView x:Name="createCourse_listview_teachers" Grid.Row="1" Grid.Column="1" />
 
         <Button x:Name="createCourse_button_create" Margin="5" Content="Create"  Grid.Row="2" Grid.Column="1"/>
 
