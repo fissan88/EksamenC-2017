@@ -21,7 +21,7 @@ namespace WpfApp
     /// </summary>
     public partial class CreateCourseWindow : Window
     {
-        Context context = new Context();
+        Context context = Storage.Context.GetInstance();
         Course tempCourse = new Course();
 
         public CreateCourseWindow()

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using static ClassLibrary.Model.AbsenceRegistration;
+using System.ComponentModel;
 
 namespace ClassLibrary.Model
 {
@@ -14,7 +15,7 @@ namespace ClassLibrary.Model
         {
 
         }
-        
+
         public List<Course> Courses { get; set; }
 
         public void RegisterAbsence(Student s, Lesson l, AbsenceStateTypes a)

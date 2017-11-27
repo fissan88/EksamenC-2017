@@ -12,13 +12,25 @@ namespace Storage
 {
     public class Context : DbContext
     {
+        public static Context instance;
+
+        public static Context GetInstance()
+        {
+            if(instance == null)
+            {
+                instance = new Context();
+                
+            }
+            return instance;
+        }
+
         public Context() :base("name=Database") { }
 
         public DbSet<User> Users { get; set; }
+        // public DbSet<Teacher> Teachers { get; set; }
+        // public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
         public DbSet<AbsenceRegistration> AbsenceRegistrations { get; set; }
 
         public User GetUserByUsername(string username)
@@ -52,13 +64,35 @@ namespace Storage
 
         public List<Teacher> GetAllTeachers()
         {
-            return Teachers.ToList();
+            return Users.OfType<Teacher>().ToList();
+        }
+
+        public List<Teacher> GetAllTeachersIncludingCourses()
+        {
+            return Users.OfType<Teacher>().Include(t => t.Courses).ToList();
+        }
+
+        public void AddTeacher(Teacher t)
+        {
+            Users.Add(t);
+            SaveChanges();
         }
 
         public void AddLesson(Course c, Lesson l)
         {
             Lessons.Add(l);
             c.Lessons.Add(l);
+            SaveChanges();
+        }
+
+        public List<Student> GetAllStudentsIncludingCourses()
+        {
+            return Users.OfType<Student>().Include(t => t.Courses).ToList();
+        }
+
+        public void AddStudent(Student s)
+        {
+            Users.Add(s);
             SaveChanges();
         }
     }

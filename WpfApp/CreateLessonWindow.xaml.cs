@@ -21,7 +21,7 @@ namespace WpfApp
     /// </summary>
     public partial class CreateLessonWindow : Window
     {
-        Context context = new Context();
+        Context context = Storage.Context.GetInstance();
         private Course selectedCourse;
 
         public CreateLessonWindow(Course c)
@@ -30,15 +30,15 @@ namespace WpfApp
 
             selectedCourse = c;
             List<TimeSpan> timeList = new List<TimeSpan>();
-            DateTime intervalStart = new DateTime(01, 01, 01, 08, 00, 00);
-            DateTime intervalStop = new DateTime(01, 01, 01, 18, 00, 00);
+            DateTime intervalStartsAt = new DateTime(01, 01, 01, 08, 00, 00);
+            DateTime intervalStopsAt = new DateTime(01, 01, 01, 18, 00, 00);
+            const int lengthOfIntervals = 15;
 
-            // Opretter tider for hvert kvarter i døgnet fra kl. 8 indtil kl. 18. Kan modificeres efter ønske.
-            while (intervalStart.CompareTo(intervalStop) <= 0)
+            // Opretter tider for hvert kvarter i døgnet fra kl. 8 indtil kl. 18.
+            while (intervalStartsAt.CompareTo(intervalStopsAt) <= 0)
             {
-                timeList.Add(intervalStart.TimeOfDay);
-                Console.WriteLine(intervalStart);
-                intervalStart = intervalStart.AddMinutes(15);
+                timeList.Add(intervalStartsAt.TimeOfDay);
+                intervalStartsAt = intervalStartsAt.AddMinutes(lengthOfIntervals);
             }
 
             createLesson_menu_startTime.ItemsSource = timeList;

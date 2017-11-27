@@ -6,8 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="Opret Nyt Kursus" Height="150" Width="300">
-    <Grid>
+        Title="Opret Nyt Kursus" Height="200" Width="300">
+    <Grid Margin="10">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
