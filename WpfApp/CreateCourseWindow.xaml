@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfApp.CreateCourseWindow"
+        x:Name="createCourse_window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="Opret Nyt Kursus" Height="150" Width="300">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Name:" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="createCourse_textbox_name" Width="Auto" Height="Auto" Grid.Row="0" Grid.Column="1"/>
+
+        <Label Content="Teacher:" Grid.Row="1" Grid.Column="0"/>
+        <ListView x:Name="createCourse_listview_teachers"  Grid.Row="1" Grid.Column="1" />
+
+        <Button x:Name="createCourse_button_create" Margin="5" Content="Create"  Grid.Row="2" Grid.Column="1"/>
+
+    </Grid>
+</Window>

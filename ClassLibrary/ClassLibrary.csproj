@@ -67,6 +67,11 @@
       <DependentUpon>201711241300347_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\AbsenceRegistration.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\Lesson.cs" />
+    <Compile Include="Model\Student.cs" />
+    <Compile Include="Model\Teacher.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\Context.cs" />
