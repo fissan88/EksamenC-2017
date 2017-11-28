@@ -8,18 +8,19 @@ using System.Web.Mvc;
 
 namespace WebApplication.Controllers
 {
-    public class HomeController : Controller
+    public class StudentController : Controller
     {
-        Context context = new Context();
+        Context context = Storage.Context.GetInstance();
 
-        public ActionResult Index(int? userId)
+        // GET: Student
+        public ActionResult Index(int id)
         {
-            User user = context.GetUserById(userId);
+            User user = context.GetUserById(id);
             if (user != null)
             {
                 return View(user);
             }
-            else return RedirectToAction("Index", "Login");
+            else return RedirectToAction("Login", "Login");
         }
     }
 }

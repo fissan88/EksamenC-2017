@@ -26,6 +26,7 @@ namespace WpfApp
     {
         Context context = Storage.Context.GetInstance();
         Course selectedCourse;
+        Student selectedStudent;
 
         public MainWindow()
         {
@@ -48,15 +49,22 @@ namespace WpfApp
             tabStudents_listview_students.ItemsSource = context.GetAllStudentsIncludingCourses();
             tabStudents_listview_students.SelectionChanged += TabStudents_listview_students_SelectionChanged;
             tabStudents_button_createStudent.Click += TabStudents_button_createStudent_Click;
-
+            tabStudents_button_enroll.Click += TabStudents_button_enroll_Click;
            
+        }
+
+        private void TabStudents_button_enroll_Click(object sender, RoutedEventArgs e)
+        {
+            EnrollStudentWindow enrollStudentWindow = new EnrollStudentWindow(selectedStudent);
+            enrollStudentWindow.DataContext = this;
+            enrollStudentWindow.Show();
         }
 
         private void TabCourse_button_enrollStudents_Click(object sender, RoutedEventArgs e)
         {
             if(selectedCourse != null)
             {
-                EnrollStudentWindow enrollStudentWindow = new EnrollStudentWindow(selectedCourse);
+                BatchEnrollStudentsWindow enrollStudentWindow = new BatchEnrollStudentsWindow(selectedCourse);
                 enrollStudentWindow.Show();
             }
         }
@@ -70,8 +78,7 @@ namespace WpfApp
 
         private void TabStudents_listview_students_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Student selectedStudent = (Student) tabStudents_listview_students.SelectedItem;
-
+            selectedStudent = (Student)tabStudents_listview_students.SelectedItem;
             if (selectedStudent != null)
             {
                 tabStudent_stackpanel_studentDetails.DataContext = selectedStudent;

@@ -18,55 +18,37 @@ namespace WpfApp
 {
     public partial class EnrollStudentWindow : Window
     {
-        Context context = Storage.Context.GetInstance();
+        Context context = Context.GetInstance();
+        Student currStudent;
         Course currCourse;
 
-        public EnrollStudentWindow(Course course)
+        public EnrollStudentWindow(Student s)
         {
             InitializeComponent();
-            currCourse = course;
-            enrollStudents_listView_students.ItemsSource = context.GetAllStudentsIncludingCourses();
-            CheckAndSetEnrollmentState();
-            enrollStudents_button_enrollStudents.Click += EnrollStudents_button_enrollStudents_Click;
+            currStudent = s;
+            enrollStudent_listview_courses.ItemsSource = context.GetCoursesStudentNotEnrolledIn(currStudent);
+            enrollStudent_listview_courses.SelectionChanged += EnrollStudent_listview_courses_SelectionChanged;
+            enrollStudent_button_enroll.Click += EnrollStudent_button_enroll_Click;
         }
 
-        private void EnrollStudents_button_enrollStudents_Click(object sender, RoutedEventArgs e)
+        private void EnrollStudent_listview_courses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateEnrollmentStateStudents();
-            Close();
+            currCourse = (Course) enrollStudent_listview_courses.SelectedItem;
+            enrollStudent_button_enroll.IsEnabled = true;
         }
 
-        public void CheckAndSetEnrollmentState()
+        private void EnrollStudent_button_enroll_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < enrollStudents_listView_students.Items.Count; i++)
+           if(currCourse != null)
             {
-                Student currItem = (Student)enrollStudents_listView_students.Items.GetItemAt(i);
+                context.EnrollStudent(currCourse, currStudent);
 
-                if (currItem.Courses.Contains(currCourse))
-                {
-                    enrollStudents_listView_students.SelectedItems.Add(enrollStudents_listView_students.Items.GetItemAt(i));
-                }
-             }
-        }
+                // Opdaterer listview for studerendes kurser i MainWindow
+                MainWindow parent = (MainWindow)this.DataContext;
+                currStudent = (Student) context.GetUserById(currStudent.Id);
+                parent.tabStudents_listview_studentsCourses.ItemsSource = currStudent.Courses;
 
-        public void UpdateEnrollmentStateStudents()
-        {
-            for (int i = 0; i < enrollStudents_listView_students.Items.Count; i++)
-            {
-                Student currStudent = (Student)enrollStudents_listView_students.Items.GetItemAt(i);
-                bool studentHasCourse = currStudent.Courses.Contains(currCourse);
-
-                if (!studentHasCourse && enrollStudents_listView_students.SelectedItems.Contains(enrollStudents_listView_students.Items.GetItemAt(i)))
-                {
-                    context.EnrollStudent(currCourse, currStudent);
-                }
-                else
-                {
-                    if(studentHasCourse && currStudent.Courses.Contains(currCourse))
-                    {
-                        context.DeleteEnrollmentStudent(currCourse, currStudent);
-                    }
-                }
+                Close();
             }
         }
     }

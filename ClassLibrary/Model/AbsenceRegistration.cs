@@ -17,6 +17,12 @@ namespace ClassLibrary.Model
 
         }
 
+        public AbsenceRegistration(Student student, Lesson lesson)
+        {
+            this.Student = student;
+            this.Lesson = lesson;
+        }
+
         public int Id { get; set; }
         public Student Student { get; set; }
         public Lesson Lesson { get; set; }

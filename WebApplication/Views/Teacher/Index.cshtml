@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+@model ClassLibrary.Model.Teacher
+
+<h2>Teacher</h2>
+
+<h3>Welcome @Html.DisplayFor(model => model.Username)</h3>
+
+<table>
+    <thead>Kurser</thead>
+    @foreach(var course in Model.Courses)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(@course.Name, "Course", "Course", new { courseId = course.Id, teacherId = Model.Id }, null)
+            </td>
+        </tr>
+    }
+</table>

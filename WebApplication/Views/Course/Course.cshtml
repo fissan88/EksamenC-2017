@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+@model ClassLibrary.Model.Course
+
+<h3>Register Absence</h3>
+
+<table>
+        @foreach(var lesson in Model.Lessons)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(lesson.StartDate + " - " + lesson.EndDate, "Lesson", "Lesson", new { lessonId = lesson.Id, courseId = Model.Id, teacherId = Model.Teacher.Id }, null)  
+                </td>
+            </tr>
+        }
+</table>

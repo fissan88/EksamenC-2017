@@ -5,31 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="EnrollStudentWindow" Height="300" Width="300">
+        Title="Enroll student" Height="320" Width="300">
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="10">
-        <ListView 
-            x:Name="enrollStudents_listView_students" 
-            Focusable="False"
-            SelectionMode="Multiple"
-            Height="210"
-            IsSynchronizedWithCurrentItem="False">
-            <ListView.View>
-                <GridView>
-                    <GridView.Columns>
-                            <GridViewColumn>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected }" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Name" Width="Auto" />
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView>
-            <Button x:Name="enrollStudents_button_enrollStudents"  Margin="10" Width="150" Content="Update enrollments" HorizontalAlignment="Right"/>
+        <StackPanel>
+            <Label Content="Select a course to enroll student to:" />
+            <ListView x:Name="enrollStudent_listview_courses" Height="200" Margin="10" Focusable="False" />
+            <Button x:Name="enrollStudent_button_enroll" Content="Enroll" Width="150" HorizontalAlignment="Right" Margin="10" IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </Window>

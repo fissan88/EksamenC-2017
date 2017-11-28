@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using ClassLibrary.Model;
+using Model;
 using Storage;
 using System;
 using System.Collections.Generic;
@@ -10,23 +11,35 @@ namespace WebApplication.Controllers
 {
     public class LoginController : Controller
     {
-        Context context = new Context();
+        Context context = Storage.Context.GetInstance();
 
         // GET: Index
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(string username)
+        public ActionResult Login(string username)
         {
             User user = context.GetUserByUsername(username);
             if (user != null)
             {
-                return RedirectToAction("Index", "Home", new { Id = user.Id });
+                if(IsUserTeacher(user))
+                {
+                    return RedirectToAction("Index", "Teacher", new { id = user.Id });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Student", new { id = user.Id });
+                }
             }
             else return View();
+        }
+
+        public bool IsUserTeacher(User u)
+        {
+            return u.GetType() == typeof(Teacher);
         }
     }
 }

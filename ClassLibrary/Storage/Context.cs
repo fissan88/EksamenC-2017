@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ClassLibrary.Model.AbsenceRegistration;
 
 namespace Storage
 {
@@ -33,13 +34,19 @@ namespace Storage
 
         public User GetUserByUsername(string username)
         {
-            User user = Users.FirstOrDefault(x => x.Username == username);
+            User user = Users.FirstOrDefault(u => u.Username == username);
             return user;
+        }
+
+        public Teacher GetTeacherById(int? id)
+        {
+            Teacher teacher = Users.OfType<Teacher>().Include(t => t.Courses).FirstOrDefault(u => u.Id == id);
+            return teacher;
         }
 
         public User GetUserById(int? id)
         {
-            User user = Users.FirstOrDefault(x => x.Id == id);
+            User user = Users.FirstOrDefault(u => u.Id == id);
             return user;
         }
 
@@ -56,7 +63,7 @@ namespace Storage
 
         public Course GetCourseById(int id)
         {
-            Course course = Courses.Include(x => x.Lessons).FirstOrDefault(x => x.Id == id);
+            Course course = Courses.Include(x => x.Lessons).Include(x => x.Students).FirstOrDefault(x => x.Id == id);
             return course;
         }
 
@@ -83,6 +90,12 @@ namespace Storage
             SaveChanges();
         }
 
+        public Lesson GetLessonById(int? id)
+        {
+            Lesson lesson = Lessons.Include(l => l.AbsenceRegistrations).FirstOrDefault(l => l.Id == id);
+            return lesson;
+        }
+
         public List<Student> GetAllStudentsIncludingCourses()
         {
             return Users.OfType<Student>().Include(t => t.Courses).ToList();
@@ -105,5 +118,28 @@ namespace Storage
             s.Courses.Remove(c);
             SaveChanges();
         }
+
+        public List<Course> GetCoursesStudentNotEnrolledIn(Student s)
+        {
+            return Courses.Where(c => !c.Students.Select(student => student.Id).Contains(s.Id)).ToList();
+        }
+
+        public List<Course> GetCoursesOfTeacher(Teacher t)
+        {
+            return Courses.Include(c => c.Lessons).Where(c => c.Teacher.Id == t.Id).ToList();
+        }
+
+        public void AddAbsenceRegistration(Lesson l, Student s)
+        {
+            AbsenceRegistrations.Add(new AbsenceRegistration(s, l));
+            SaveChanges();
+        }
+
+        public AbsenceRegistration GetAbsenceRegistrationById(int? id)
+        {
+            AbsenceRegistration absenceRegistration = AbsenceRegistrations.FirstOrDefault(a => a.Id == id);
+            return absenceRegistration;
+        }
+
     }
 }

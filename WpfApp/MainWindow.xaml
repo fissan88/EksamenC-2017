@@ -146,9 +146,10 @@
                         <TextBox Width="300" HorizontalAlignment="Right" Text="{ Binding Username, Mode=TwoWay }" />
                     </DockPanel>
 
-                    <!-- Lærerens Fag -->
+                    <!-- Den studerendes fag -->
                     <Label Content="Is enrolled to the following:" />
-                    <ListView  x:Name="tabStudents_listview_studentsCourses" Height="200" Margin="10" Focusable="False" />
+                    <ListView x:Name="tabStudents_listview_studentsCourses" Height="200" Margin="10" Focusable="False" />
+                    <Button x:Name="tabStudents_button_enroll" Content="Enroll to new course" Width="150" HorizontalAlignment="Right" Margin="10"/>
                 </StackPanel>
             </Grid>
         </TabItem>
