@@ -25,7 +25,7 @@
 
                 <!-- Listview Fag -->
                 <Label Content="Registered courses:" Grid.Row="0" Grid.Column="0" />
-                <ListView Margin="10" x:Name="tabCourse_listview_courses" Grid.Row="1" Grid.Column="0" >
+                <ListView Margin="10" x:Name="tabCourse_listview_courses" Grid.Row="1" Grid.Column="0" SelectionMode="Single">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="#" Width="20" DisplayMemberBinding="{Binding Id}" />
@@ -35,7 +35,7 @@
                 </ListView.View>
                 </ListView>
 
-                <ListView Margin="10" x:Name="tabCourse_listview_lessons" Grid.Row="1" Grid.Column="1" IsEnabled="False">
+                <ListView Margin="10" x:Name="tabCourse_listview_lessons" Grid.Row="1" Grid.Column="1" IsEnabled="False" SelectionMode="Single">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="#" Width="20" DisplayMemberBinding="{Binding Id}" />
@@ -44,7 +44,11 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="tabCourse_button_createCourse" Width="150" Margin="10" HorizontalAlignment="Right" Content="Create course" Grid.Row="2" Grid.Column="0" />
+
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">
+                    <Button x:Name="tabCourse_button_enrollStudents" Width="150" Margin="10"  Content="Enroll students" IsEnabled="False" />
+                    <Button x:Name="tabCourse_button_createCourse" Width="150" Margin="10"  Content="Create course" />
+                </StackPanel>
                 <Button x:Name="tabCourse_button_createLesson" Width="150" Margin="10" HorizontalAlignment="Right" Content="Create lesson" Grid.Row="2" Grid.Column="1" IsEnabled="False" />
 
             </Grid>
@@ -68,7 +72,7 @@
 
             <!-- Listview Lærerer -->
             <Label Content="Registered teachers:" Grid.Row="0" Grid.Column="0" />
-            <ListView Margin="10" x:Name="tabTeachers_listview_teachers" Grid.Row="1" Grid.Column="0" >
+                <ListView Margin="10" x:Name="tabTeachers_listview_teachers" Grid.Row="1" Grid.Column="0" SelectionMode="Single">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="#" Width="20" DisplayMemberBinding="{ Binding Id }" />
@@ -79,7 +83,7 @@
 
                 <Button x:Name="tabTeachers_button_createTeacher"  Width="150" HorizontalAlignment="Right" Content="Create teacher" Margin="10"  Grid.Row="2" Grid.Column="0" />
 
-                <StackPanel x:Name="tabTeachers_stackpanel_teacherDetails" DataContext="" Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                <StackPanel x:Name="tabTeachers_stackpanel_teacherDetails" DataContext="" Orientation="Vertical" Grid.Row="1" Grid.Column="1" IsEnabled="False">
                 <!-- Navn -->
                     <DockPanel Width="Auto" >
                         <Label Content="Full name:" />
@@ -118,7 +122,7 @@
 
                 <!-- Listview Studerende -->
                 <Label Content="Registered students:" Grid.Row="0" Grid.Column="0" />
-                <ListView Margin="10" x:Name="tabStudents_listview_students" Grid.Row="1" Grid.Column="0" >
+                <ListView Margin="10" x:Name="tabStudents_listview_students" Grid.Row="1" Grid.Column="0" SelectionMode="Single">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="#" Width="20" DisplayMemberBinding="{ Binding Id }" />
@@ -129,7 +133,7 @@
 
                 <Button x:Name="tabStudents_button_createStudent"  Width="150" HorizontalAlignment="Right" Content="Create student" Margin="10"  Grid.Row="2" Grid.Column="0" />
 
-                <StackPanel x:Name="tabStudent_stackpanel_studentDetails" DataContext="" Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                <StackPanel x:Name="tabStudent_stackpanel_studentDetails" DataContext="" Orientation="Vertical" Grid.Row="1" Grid.Column="1" IsEnabled="False">
                     <!-- Navn -->
                     <DockPanel Width="Auto" >
                         <Label Content="Full name:" />
@@ -146,8 +150,6 @@
                     <Label Content="Is enrolled to the following:" />
                     <ListView  x:Name="tabStudents_listview_studentsCourses" Height="200" Margin="10" Focusable="False" />
                 </StackPanel>
-
-
             </Grid>
         </TabItem>
     </TabControl>

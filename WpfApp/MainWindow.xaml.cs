@@ -36,7 +36,8 @@ namespace WpfApp
             tabCourse_listview_courses.SelectionChanged += TabCourse_listview_courses_SelectionChanged;
             tabCourse_button_createCourse.Click += TabCourse_button_createCourse_Click;
             tabCourse_button_createLesson.Click += TabCourse_button_createLesson_Click;
-
+            // Tilmeld studerende - knap
+            tabCourse_button_enrollStudents.Click += TabCourse_button_enrollStudents_Click;
 
             // Lærer -tabben
             tabTeachers_listview_teachers.ItemsSource = context.GetAllTeachersIncludingCourses();
@@ -48,6 +49,16 @@ namespace WpfApp
             tabStudents_listview_students.SelectionChanged += TabStudents_listview_students_SelectionChanged;
             tabStudents_button_createStudent.Click += TabStudents_button_createStudent_Click;
 
+           
+        }
+
+        private void TabCourse_button_enrollStudents_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedCourse != null)
+            {
+                EnrollStudentWindow enrollStudentWindow = new EnrollStudentWindow(selectedCourse);
+                enrollStudentWindow.Show();
+            }
         }
 
         private void TabStudents_button_createStudent_Click(object sender, RoutedEventArgs e)
@@ -64,6 +75,7 @@ namespace WpfApp
             if (selectedStudent != null)
             {
                 tabStudent_stackpanel_studentDetails.DataContext = selectedStudent;
+                tabStudent_stackpanel_studentDetails.IsEnabled = true;
                 tabStudents_listview_studentsCourses.ItemsSource = selectedStudent.Courses;
             }
         }
@@ -82,6 +94,7 @@ namespace WpfApp
             if (selectedTeacher != null)
             {
                 tabTeachers_stackpanel_teacherDetails.DataContext = selectedTeacher;
+                tabTeachers_stackpanel_teacherDetails.IsEnabled = true;
                 tabTeachers_listview_teachersCourses.ItemsSource = selectedTeacher.Courses;
             }
         }
@@ -107,10 +120,12 @@ namespace WpfApp
             if(selectedCourse != null)
             {
                 tabCourse_button_createLesson.IsEnabled = true;
+                tabCourse_button_enrollStudents.IsEnabled = true;
             }
             else
             {
                 tabCourse_button_createLesson.IsEnabled = false;
+                tabCourse_button_enrollStudents.IsEnabled = false;
             }
 
             if (selectedCourse.Lessons.Count > 0)

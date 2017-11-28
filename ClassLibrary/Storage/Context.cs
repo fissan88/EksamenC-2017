@@ -27,8 +27,6 @@ namespace Storage
         public Context() :base("name=Database") { }
 
         public DbSet<User> Users { get; set; }
-        // public DbSet<Teacher> Teachers { get; set; }
-        // public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<AbsenceRegistration> AbsenceRegistrations { get; set; }
@@ -93,6 +91,18 @@ namespace Storage
         public void AddStudent(Student s)
         {
             Users.Add(s);
+            SaveChanges();
+        }
+
+        public void EnrollStudent(Course c, Student s)
+        {
+            s.Courses.Add(c);
+            SaveChanges();
+        }
+
+        public void DeleteEnrollmentStudent(Course c, Student s)
+        {
+            s.Courses.Remove(c);
             SaveChanges();
         }
     }
