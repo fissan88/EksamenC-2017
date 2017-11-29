@@ -13,19 +13,9 @@ namespace ClassLibrary.Model
     {
         public Teacher()
         {
-
+            Courses = new List<Course>();
         }
 
         public List<Course> Courses { get; set; }
-
-        public void RegisterAbsence(Student s, Lesson l, AbsenceStateTypes a)
-        {
-
-        }
-        
-        public override string ToString()
-        {
-            return this.FullName;
-        }
     }
 }

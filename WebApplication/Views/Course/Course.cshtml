@@ -5,15 +5,27 @@
 
 @model ClassLibrary.Model.Course
 
-<h3>Register Absence</h3>
+<h3>Register absence for:</h3>
 
-<table>
-        @foreach(var lesson in Model.Lessons)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(lesson.StartDate + " - " + lesson.EndDate, "Lesson", "Lesson", new { lessonId = lesson.Id, courseId = Model.Id, teacherId = Model.Teacher.Id }, null)  
-                </td>
-            </tr>
-        }
-</table>
+
+    @if (Model.Lessons.Count > 0)
+    {
+        <table>
+            @foreach (var lesson in Model.Lessons)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(lesson.StartDate + " - " + lesson.EndDate, "Lesson", "Lesson", new { lessonId = lesson.Id, courseId = Model.Id }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <br />
+        @Html.ActionLink("See overview of absence per student", "AbsencePerStudent", new { courseId = Model.Id }, null)
+    }
+    else
+    {
+        <p>Course has no lessons registered ...</p>
+    }
+        

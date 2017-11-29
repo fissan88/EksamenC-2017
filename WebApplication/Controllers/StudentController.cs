@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using ClassLibrary.Model;
+using Model;
 using Storage;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,12 @@ namespace WebApplication.Controllers
         Context context = Storage.Context.GetInstance();
 
         // GET: Student
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
         {
-            User user = context.GetUserById(id);
-            if (user != null)
+            Student student = context.GetStudentById(id);
+            if (student != null)
             {
-                return View(user);
+                return View(student);
             }
             else return RedirectToAction("Login", "Login");
         }

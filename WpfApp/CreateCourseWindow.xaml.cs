@@ -39,9 +39,9 @@ namespace WpfApp
 
             if(teacher != null && name.Length > 0)
             {
-                Course newCourse = new Course(name, teacher);
-                context.AddCourse(newCourse);
-
+                Course newCourse = new Course(name);
+                context.AddCourse(newCourse, teacher);
+                
                 // Opdaterer listview i MainWindow
                 MainWindow parent = (MainWindow)this.DataContext;
                 parent.tabCourse_listview_courses.ItemsSource = context.GetAllCourses();

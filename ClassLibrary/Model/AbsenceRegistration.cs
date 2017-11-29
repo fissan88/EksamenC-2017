@@ -26,6 +26,6 @@ namespace ClassLibrary.Model
         public int Id { get; set; }
         public Student Student { get; set; }
         public Lesson Lesson { get; set; }
-        public AbsenceStateTypes AbsenceState { get; set; }
+        public AbsenceStateTypes? AbsenceState { get; set; }
     }
 }

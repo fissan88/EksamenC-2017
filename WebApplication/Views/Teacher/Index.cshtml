@@ -5,17 +5,20 @@
 
 @model ClassLibrary.Model.Teacher
 
-<h2>Teacher</h2>
+<h2>Teacher Administration</h2>
 
 <h3>Welcome @Html.DisplayFor(model => model.Username)</h3>
 
 <table>
-    <thead>Kurser</thead>
+    <tr><td width="200px"><b>Course</b></td>  <td width="200px"><b>Average absence %</b></td></tr>
     @foreach(var course in Model.Courses)
     {
         <tr>
             <td>
                 @Html.ActionLink(@course.Name, "Course", "Course", new { courseId = course.Id, teacherId = Model.Id }, null)
+            </td>
+            <td>
+                @course.CalcAverageAbsenceRate()%
             </td>
         </tr>
     }

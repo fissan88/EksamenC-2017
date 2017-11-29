@@ -40,8 +40,14 @@ namespace Storage
 
         public Teacher GetTeacherById(int? id)
         {
-            Teacher teacher = Users.OfType<Teacher>().Include(t => t.Courses).FirstOrDefault(u => u.Id == id);
+            Teacher teacher = Users.OfType<Teacher>().Include(t => t.Courses.Select(c => c.Lessons.Select(l => l.AbsenceRegistrations))).FirstOrDefault(u => u.Id == id);
             return teacher;
+        }
+
+        public Student GetStudentById(int? id)
+        {
+            Student student = Users.OfType<Student>().Include(s => s.Courses.Select(course => course.Lessons.Select(lesson => lesson.AbsenceRegistrations))).FirstOrDefault(s => s.Id == id);
+            return student;
         }
 
         public User GetUserById(int? id)
@@ -50,20 +56,21 @@ namespace Storage
             return user;
         }
 
-        public void AddCourse(Course c)
+        public void AddCourse(Course c, Teacher t)
         {
             Courses.Add(c);
+            t.Courses.Add(c);
             SaveChanges();
         }
 
         public List<Course> GetAllCourses()
         {
-            return Courses.Include(c => c.Lessons).Include(c => c.Teacher).ToList();
+            return Courses.Include(c => c.Lessons).ToList();
         }
 
         public Course GetCourseById(int id)
         {
-            Course course = Courses.Include(x => x.Lessons).Include(x => x.Students).FirstOrDefault(x => x.Id == id);
+            Course course = Courses.Include(c => c.Lessons).Include(c => c.Students).FirstOrDefault(c => c.Id == id);
             return course;
         }
 
@@ -107,6 +114,29 @@ namespace Storage
             SaveChanges();
         }
 
+        public void InitAbsenceRegistrationForLesson(int lessonId, int courseId)
+        {
+            Course course = GetCourseById(courseId);
+            Lesson lesson = GetLessonById(lessonId);
+
+            List<Student> students = course.Students;
+
+            for (int i = 0; i < students.Count; i++)
+            {
+                AddAbsenceRegistration(lesson, students[i]);
+            }
+        }
+
+        public void AddAbsenceRegistrations(List<AbsenceRegistration> absenceRegistrations)
+        {
+            foreach (var a in absenceRegistrations)
+            {
+                GetAbsenceRegistrationById(a.Id).AbsenceState = a.AbsenceState;
+            }
+
+            SaveChanges();
+        }
+
         public void EnrollStudent(Course c, Student s)
         {
             s.Courses.Add(c);
@@ -116,17 +146,19 @@ namespace Storage
         public void DeleteEnrollmentStudent(Course c, Student s)
         {
             s.Courses.Remove(c);
+            foreach(var a in AbsenceRegistrations)
+            {
+                if(a.Student == s)
+                {
+                    AbsenceRegistrations.Remove(a);
+                }
+            }
             SaveChanges();
         }
 
         public List<Course> GetCoursesStudentNotEnrolledIn(Student s)
         {
             return Courses.Where(c => !c.Students.Select(student => student.Id).Contains(s.Id)).ToList();
-        }
-
-        public List<Course> GetCoursesOfTeacher(Teacher t)
-        {
-            return Courses.Include(c => c.Lessons).Where(c => c.Teacher.Id == t.Id).ToList();
         }
 
         public void AddAbsenceRegistration(Lesson l, Student s)

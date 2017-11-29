@@ -15,20 +15,17 @@ namespace WebApplication.Controllers
         Context context = Storage.Context.GetInstance();
 
         // GET: Lesson
-        public ActionResult Lesson(int teacherId, int courseId, int lessonId)
+        public ActionResult Lesson(int courseId, int lessonId)
         {
             Lesson lesson = context.GetLessonById(lessonId);
-            List<Student> students = context.GetCourseById(courseId).Students;
 
+            // Tilføjer en AbsenceRegistration til hver studerende til den valgt lektion, første gang læreren åbner lektionen
             if(lesson.AbsenceRegistrations.Count == 0)
             {
-                for(int i = 0; i < students.Count; i++)
-                {
-                    context.AddAbsenceRegistration(lesson, students[i]);
-                }
+                context.InitAbsenceRegistrationForLesson(lessonId, courseId);
             }
 
-            AbsenceRegModel viewModel = new AbsenceRegModel() { Lesson = lesson, Students = students, AbsenceRegistrations = lesson.AbsenceRegistrations, CourseId = courseId, TeacherId = teacherId };
+            AbsenceRegModel viewModel = new AbsenceRegModel() { Lesson = lesson, AbsenceRegistrations = lesson.AbsenceRegistrations, CourseId = courseId };
 
             return View(viewModel);
         }
@@ -36,12 +33,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult Lesson(AbsenceRegModel model)
         {
-            foreach(var a in model.AbsenceRegistrations)
-            {
-                context.GetAbsenceRegistrationById(a.Id).AbsenceState = a.AbsenceState;
-            }
-
-            context.SaveChanges();
+            context.AddAbsenceRegistrations(model.AbsenceRegistrations);
             return Redirect(Request.UrlReferrer.ToString());
         }
     }

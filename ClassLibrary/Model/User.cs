@@ -43,6 +43,11 @@ namespace Model
             }
         }
 
+        public override string ToString()
+        {
+            return this.FullName;
+        }
+
         protected void Notify(string propName)
         {
             if (this.PropertyChanged != null)

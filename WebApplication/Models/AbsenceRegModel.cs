@@ -16,7 +16,6 @@ namespace WebApplication.Models
 
         }
         public Lesson Lesson { get; set; }
-        public List<Student> Students { get; set; }
         public Teacher Teacher { get; set; }
         public List<AbsenceRegistration> AbsenceRegistrations { get; set; }
         public int CourseId { get; set; }

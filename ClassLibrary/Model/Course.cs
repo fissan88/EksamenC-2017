@@ -14,10 +14,9 @@ namespace ClassLibrary.Model
 
         }
 
-        public Course(string name, Teacher teacher)
+        public Course(string name)
         {
             this.Name = name;
-            this.Teacher = teacher;
             this.Lessons = new List<Lesson>();
             this.Students = new List<Student>();
         }
@@ -26,11 +25,45 @@ namespace ClassLibrary.Model
         public string Name { get; set; }
         public List<Lesson> Lessons { get; set; }
         public List<Student> Students { get; set; }
-        public Teacher Teacher { get; set; }
+        // public Teacher Teacher { get; set; }
 
         public override string ToString()
         {
             return Name;
+        }
+        
+        public decimal CalcAverageAbsenceRate()
+        {
+            decimal countAbsence = 0;
+            decimal totalRegistrations = 0;
+            
+            if (Lessons != null && Lessons.Count > 0)
+            {
+                foreach (var l in Lessons)
+                {
+                    foreach (var a in l.AbsenceRegistrations)
+                    {
+                        if (a.AbsenceState != null)
+                        {
+                            totalRegistrations++;
+                            if (a.AbsenceState == AbsenceRegistration.AbsenceStateTypes.Absent || a.AbsenceState == AbsenceRegistration.AbsenceStateTypes.LegalAbsence)
+                            {
+                                countAbsence++;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if(totalRegistrations != 0)
+            {
+                decimal result = (countAbsence / totalRegistrations) * 100;
+                return Math.Round(result, 2); ;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

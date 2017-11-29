@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "AbsencePerStudent";
+}
+@model ClassLibrary.Model.Course
+
+<h2>AbsencePerStudent</h2>
+<table>
+    <tr><td width="200px"><b>Student name</b></td><td width="200px"><b>Absence rate in %</b></td></tr>
+    @foreach(var s in Model.Students)
+    {
+        <tr>
+            <td>
+                @s.FullName
+            </td>
+            <td>
+                @s.CalcAbsenceRate(Model)
+            </td>
+        </tr>
+    }
+</table>

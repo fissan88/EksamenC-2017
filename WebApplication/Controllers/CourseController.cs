@@ -13,7 +13,14 @@ namespace WebApplication.Controllers
         Context context = Storage.Context.GetInstance();
 
         // GET: Course
-        public ActionResult Course(int courseId, int teacherId)
+        public ActionResult Course(int courseId)
+        {
+            Course course = context.GetCourseById(courseId);
+            return View(course);
+        }
+
+        // GET: AbsencePerStudent
+        public ActionResult AbsencePerStudent(int courseId)
         {
             Course course = context.GetCourseById(courseId);
             return View(course);
