@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,7 @@ namespace Model
             get { return this.username; }
             set
             {
-                if (this.username == value) { return; }
                 this.username = value;
-                Notify("Username");
             }
         }
         

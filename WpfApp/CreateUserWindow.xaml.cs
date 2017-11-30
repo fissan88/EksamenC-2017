@@ -38,31 +38,40 @@ namespace WpfApp
             string fullname = createTeacher_textBox_fullname.Text;
             string username = createTeacher_textBox_username.Text;
 
-            if(fullname.Length > 0 && username.Length > 0)
+            if(context.GetUserByUsername(username) == null)
             {
-                MainWindow parent = (MainWindow)this.DataContext;
-                if (typeCheck.GetType() == typeof(Teacher))
+                if (fullname.Length > 0 && username.Length > 0)
                 {
-                    Teacher newTeacher = new Teacher { FullName = fullname, Username = username };
-                    context.AddTeacher(newTeacher);
+                    MainWindow parent = (MainWindow)this.DataContext;
+                    if (typeCheck.GetType() == typeof(Teacher))
+                    {
+                        Teacher newTeacher = new Teacher { FullName = fullname, Username = username };
+                        context.AddTeacher(newTeacher);
 
-                    // Opdaterer teacher listview i parent viduet
-                    parent.tabTeachers_listview_teachers.ItemsSource = context.GetAllTeachers();
+                        // Opdaterer teacher listview i parent viduet
+                        parent.tabTeachers_listview_teachers.ItemsSource = context.GetAllTeachers();
+                    }
+                    else
+                    {
+                        Student newStudent = new Student { FullName = fullname, Username = username };
+                        context.AddStudent(newStudent);
+
+                        // Opdaterer student listview i parent viduet
+                        parent.tabStudents_listview_students.ItemsSource = context.GetAllStudentsIncludingCourses();
+                    }
+                    Close();
                 }
                 else
                 {
-                    Student newStudent = new Student { FullName = fullname, Username = username };
-                    context.AddStudent(newStudent);
-
-                    // Opdaterer student listview i parent viduet
-                    parent.tabStudents_listview_students.ItemsSource = context.GetAllStudentsIncludingCourses();
+                    System.Windows.MessageBox.Show("Please specify both a username and your full name!");
                 }
-                Close();
             }
             else
             {
-                 System.Windows.MessageBox.Show("Please specify both a username and your full name!"); 
+                System.Windows.MessageBox.Show("Username is already taken!");
             }
+
+            
         }
     }
 }

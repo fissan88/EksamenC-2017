@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApplication\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{8592697F-D06D-4C89-B59A-9003270FCB13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanvasSync", "E:\Dropbox\canvas-api-exercise\CanvasApi\CanvasSync.csproj", "{6F741B27-B90D-4A0C-89B9-15F7B126080D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8592697F-D06D-4C89-B59A-9003270FCB13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8592697F-D06D-4C89-B59A-9003270FCB13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8592697F-D06D-4C89-B59A-9003270FCB13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F741B27-B90D-4A0C-89B9-15F7B126080D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F741B27-B90D-4A0C-89B9-15F7B126080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F741B27-B90D-4A0C-89B9-15F7B126080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F741B27-B90D-4A0C-89B9-15F7B126080D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

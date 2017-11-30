@@ -27,11 +27,11 @@ namespace WebApplication.Controllers
             {
                 if(IsUserTeacher(user))
                 {
-                    return RedirectToAction("Index", "Teacher", new { id = user.Id });
+                    return RedirectToAction("Index", "Teacher", new { teacherId = user.Id });
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Student", new { id = user.Id });
+                    return RedirectToAction("Index", "Student", new { studentId = user.Id });
                 }
             }
             else return View();

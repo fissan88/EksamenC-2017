@@ -14,9 +14,9 @@ namespace WebApplication.Controllers
         Context context = Storage.Context.GetInstance();
 
         // GET: Student
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? studentId)
         {
-            Student student = context.GetStudentById(id);
+            Student student = context.GetStudentById(studentId);
             if (student != null)
             {
                 return View(student);

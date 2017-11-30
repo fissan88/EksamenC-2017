@@ -5,18 +5,33 @@
 
 @model ClassLibrary.Model.Course
 
-<h3>Register absence for:</h3>
-
+<h2>Register absence for:</h2>
 
     @if (Model.Lessons.Count > 0)
     {
         <table>
-            @foreach (var lesson in Model.Lessons)
+            <tr><td width="400px"><b>Lesson</b></td><td width="100px"><b>Status</b></td></tr>
+            @{ var lessonsOrdered = Model.Lessons.OrderBy(l => l.Visisted); }
+            @foreach (var lesson in lessonsOrdered)
             {
                 <tr>
                     <td>
                         @Html.ActionLink(lesson.StartDate + " - " + lesson.EndDate, "Lesson", "Lesson", new { lessonId = lesson.Id, courseId = Model.Id }, null)
                     </td>
+                    @if (lesson.Visisted)
+                    {
+                        <td>
+                            &#9989;
+                            @if (lesson.AbsenceRegistrations.Where(a => a.AbsenceState == null).Count() > 0)
+                            {
+                                <text>&#10071;</text>
+} 
+                        </td>
+                    }
+                    else
+                    {
+                        <td>&#10060;</td>
+                    }
                 </tr>
             }
         </table>

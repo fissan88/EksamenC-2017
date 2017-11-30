@@ -11,7 +11,7 @@
 @using (Html.BeginForm())
 {
 
-       if(Model.AbsenceRegistrations.Count() != 0)
+       if(Model.AbsenceRegistrations.Count() > 0)
        {
             <table>
                 <tr><td width="200px"><b>Student Name</b></td><td width="200px"><b>State</b></td></tr>
@@ -34,11 +34,11 @@
        }
        else
        {
-            <p>Course has no students enrolled ...</p>
+            <p>Your course has no students enrolled ...</p>
        }
 }
 <br/>
-@Html.ActionLink("<< Back to lessons overview", "Course", "Course", new { courseId = Model.CourseId, teacherId = Model.TeacherId }, null)
+@Html.ActionLink("<< Back to lessons overview", "Course", "Course", new { courseId = Model.CourseId }, null)
 
   
   

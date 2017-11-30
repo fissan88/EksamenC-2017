@@ -4,17 +4,22 @@
 }
 @model ClassLibrary.Model.Course
 
-<h2>AbsencePerStudent</h2>
+<h3>Absence Per Student</h3>
+
 <table>
-    <tr><td width="200px"><b>Student name</b></td><td width="200px"><b>Absence rate in %</b></td></tr>
-    @foreach(var s in Model.Students)
+    <tr><td width="200px"><b>Student name</b></td><td width="200px"><b>Absence rate in %</b></td><td width="200px"><b>Legal Absence rate in %</b></td></tr>
+    @foreach (var s in Model.Students)
     {
         <tr>
             <td>
                 @s.FullName
             </td>
+            <td>    
+                @{ var absenceRates = s.CalcAbsenceRate(Model); }
+                @absenceRates[0]%
+            </td>
             <td>
-                @s.CalcAbsenceRate(Model)
+                @absenceRates[1]%
             </td>
         </tr>
     }

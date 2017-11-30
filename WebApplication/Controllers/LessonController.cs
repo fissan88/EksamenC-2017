@@ -19,7 +19,7 @@ namespace WebApplication.Controllers
         {
             Lesson lesson = context.GetLessonById(lessonId);
 
-            // Tilføjer en AbsenceRegistration til hver studerende til den valgt lektion, første gang læreren åbner lektionen
+            // Tilføjer en AbsenceRegistration til hver studerende til den valgt lektion, første gang underviseren åbner lektionen
             if(lesson.AbsenceRegistrations.Count == 0)
             {
                 context.InitAbsenceRegistrationForLesson(lessonId, courseId);
@@ -34,6 +34,8 @@ namespace WebApplication.Controllers
         public ActionResult Lesson(AbsenceRegModel model)
         {
             context.AddAbsenceRegistrations(model.AbsenceRegistrations);
+
+            // Sørger for at brugeren bliver på samme side
             return Redirect(Request.UrlReferrer.ToString());
         }
     }

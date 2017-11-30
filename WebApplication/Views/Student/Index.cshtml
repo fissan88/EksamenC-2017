@@ -7,38 +7,47 @@
 
 <h2>Student Administration</h2>
 
-<h3>Welcome @Html.DisplayFor(model => model.FullName)</h3>
+<h3>Welcome @Html.DisplayFor(model => model.FullName) (@Html.DisplayFor(model => model.Username))</h3>
 
-<table>
-    <tr><td width="400px"><b>Lesson</b></td><td width="200px"><b>Absence state</b></td></tr>
-    @foreach(var a in Model.AbsenceRegistrations)
-    {
-        <tr>
-            @if (a.AbsenceState != null)
+@if (Model.AbsenceRegistrations != null)
+{
+    <table>
+        <tr><th width="400px"><b>Lesson</b></th><th width="200px"><b>Absence state</b></th></tr>
+        @foreach (var a in Model.AbsenceRegistrations)
+        {
+            <tr>
+                @if (a.AbsenceState != null)
+                {
+                    <td>
+                        @a.Lesson.StartDate - @a.Lesson.EndDate
+                    </td>
+                    <td>
+                        @a.AbsenceState
+                    </td>
+                }
+            </tr>
+        }
+       </table>
+    <br/>
+        <table>
+            <tr><th width="200px"><b>Course</b></th><th width="200px"><b>Absence rate in %</b></th><th width="200px"><b>Legal absence rate in %</b></th></tr>
+            @foreach (var c in Model.Courses)
             {
-                <td>
-                    @a.Lesson.StartDate - @a.Lesson.EndDate
-                </td>
-                <td>
-                    @a.AbsenceState
-                </td>
-            }    
-        </tr>
-    }
-</table>
-<br/>
-<table>
-    <tr><td width="200px"><b>Course</b></td><td width="200px"><b>Absence rate in %</b></td></tr>
-    @foreach (var c in Model.Courses)
-    {
-        <tr>
-            <td>
-                @c.Name
-            </td>
-            <td>
-                @Model.CalcAbsenceRate(c)%
-            </td>
-            
-        </tr>
-    }
-</table>
+                <tr>
+                    <td>
+                        @c.Name
+                    </td>
+                    <td>
+                        @{ var absenceRates = Model.CalcAbsenceRate(c); }
+                        @absenceRates[0]%
+                    </td>
+                    <td>
+                        @absenceRates[1]%
+                    </td>
+                </tr>
+                            }
+        </table>
+                            } else
+                            {
+                                <p>No absence has been registered to your user yet ...</p>
+                            }

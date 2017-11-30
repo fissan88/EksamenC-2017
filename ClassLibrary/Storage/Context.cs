@@ -38,6 +38,18 @@ namespace Storage
             return user;
         }
 
+        public Teacher GetTeacherByUsername(string username)
+        {
+            Teacher teacher = Users.OfType<Teacher>().Include(l => l.Courses).FirstOrDefault(t => t.Username == username);
+            return teacher;
+        }
+
+        public Student GetStudentByUsername(string username)
+        {
+            Student student = Users.OfType<Student>().Include(s => s.Courses).FirstOrDefault(s => s.Username == username);
+            return student;
+        }
+
         public Teacher GetTeacherById(int? id)
         {
             Teacher teacher = Users.OfType<Teacher>().Include(t => t.Courses.Select(c => c.Lessons.Select(l => l.AbsenceRegistrations))).FirstOrDefault(u => u.Id == id);
@@ -54,6 +66,12 @@ namespace Storage
         {
             User user = Users.FirstOrDefault(u => u.Id == id);
             return user;
+        }
+
+        public Course GetCourseByName(string name)
+        {
+            Course course = Courses.FirstOrDefault(c => c.Name == name);
+            return course;
         }
 
         public void AddCourse(Course c, Teacher t)
@@ -118,6 +136,7 @@ namespace Storage
         {
             Course course = GetCourseById(courseId);
             Lesson lesson = GetLessonById(lessonId);
+            lesson.Visisted = true;
 
             List<Student> students = course.Students;
 

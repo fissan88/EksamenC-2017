@@ -14,9 +14,9 @@ namespace WebApplication.Controllers
     {
         Context context = Storage.Context.GetInstance();
 
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? teacherId)
         {
-            Teacher teacher = context.GetTeacherById(id);
+            Teacher teacher = context.GetTeacherById(teacherId);
 
             if (teacher != null)
             {

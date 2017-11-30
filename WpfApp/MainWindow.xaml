@@ -93,7 +93,7 @@
                 <!-- Brugernavn -->
                     <DockPanel>
                         <Label Content="Username:" />
-                        <TextBox Width="300" HorizontalAlignment="Right" Text="{ Binding Username, Mode=TwoWay }" />
+                        <TextBox Width="300" HorizontalAlignment="Right" Focusable="False" Text="{ Binding Username, Mode=OneWay }" />
                     </DockPanel>
 
                 <!-- Lærerens Fag -->
@@ -143,7 +143,7 @@
                     <!-- Brugernavn -->
                     <DockPanel>
                         <Label Content="Username:" />
-                        <TextBox Width="300" HorizontalAlignment="Right" Text="{ Binding Username, Mode=TwoWay }" />
+                        <TextBox Width="300" HorizontalAlignment="Right" Focusable="False" Text="{ Binding Username, Mode=OneWay }" />
                     </DockPanel>
 
                     <!-- Den studerendes fag -->
